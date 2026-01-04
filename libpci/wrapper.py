@@ -239,8 +239,8 @@ class LibPCI(object):
         _logger.debug("Performing the lookup on vendor:device "
                       "subvendor:subdevice %#06x:%#06x %#06x:%#06x",
                       vendor_id, device_id, subvendor_id, subdevice_id)
-        flags = self._flags | pci_lookup_mode.PCI_LOOKUP_SUBSYSTEM
-        flags = self._flags | pci_lookup_mode.PCI_LOOKUP_DEVICE
+        flags = (self._flags | pci_lookup_mode.PCI_LOOKUP_SUBSYSTEM
+                             | pci_lookup_mode.PCI_LOOKUP_DEVICE)
         pci_lookup_name4(self._access, buf, ctypes.sizeof(buf), flags,
                          vendor_id, device_id, subvendor_id, subdevice_id)
         return buf.value.decode("utf-8")
